@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Billede</th>
+            <th>Navn</th>
+            <th>Type</th>
+            <th>Oprettet</th>
+            <th>Slet</th>
+        </tr>
+    </thead>
+    @foreach (System.IO.FileInfo file in Model)
+    {
+        <tr>
+            <td>
+                <img width="300" class="img-circle" src="~/Content/Upload/winDefImgs/@file.Name" alt="Alternate Text" />
+            </td>
+            <td><p>@file.Name</p></td>
+            <td><p>@file.Extension</p></td>
+            <td><p>@file.CreationTime</p></td>
+            <td><a href="@Url.Action("Delete", new { name = file.Name})">Slet</a></td>
+        </tr>
+    }
+</table>

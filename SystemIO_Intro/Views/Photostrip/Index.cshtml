@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lav din egen "Photostrip"</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="authorName">Dit navn</label>
+                <input type="text" name="authorName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="file">Fil</label>
+                <input type="file" name="files" class="form-control" multiple="multiple" />
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("maxWidth")
+                        @Html.TextBox("maxWidth", null, new { @class = "form-control", @type = "number" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.Label("addFilmDecor", "Tilføj filmrulle kanter", null)
+                        @Html.CheckBox("addFilmDecor", false, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.Label("addImageNameDecor", "Tilføj billede navne", null)
+                        @Html.CheckBox("addImageNameDecor", false, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.Label("addCopyrightDecor", "Tilføj \"lavet af\"", null)
+                        @Html.CheckBox("addCopyrightDecor", false, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Resize billede</button>
+        }
+    </div>
+    <div class="col-md-12">
+        @if (Model != null)
+        {
+            <div class="panel">
+                <div class="panel-body">
+                    <h4>
+                        Dit nye og resized billede
+                    </h4>
+                    <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.ToArray(), 0,Model.ToArray().Length))" />
+                    @*Henter alle billeder ud og viser dem*@
+                    @*@foreach (var stripImg in Model)
+                        {
+                            <img src="data:image/jpeg;base64,@(Convert.ToBase64String(stripImg.ToArray(), 0,stripImg.ToArray().Length))" />
+                        }*@
+                </div>
+            </div>
+        }
+    </div>
+</div>

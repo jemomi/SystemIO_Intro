@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="text" name="album" value="" placeholder="Album navn" />
+
+    <input type="file" name="files" value="file" multiple="multiple" />
+    <input type="submit" name="uploadFile" value="Upload" />
+}

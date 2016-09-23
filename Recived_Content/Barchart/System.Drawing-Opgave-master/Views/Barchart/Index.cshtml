@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+@using (Html.BeginForm())
+{
+    <p>Skriv værdier for hver måned og generer et barchart ud af dette.</p>
+    <div class="row">
+        @for (int i = 1; i < 13; i++)
+        {
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</label>
+                    <input type="number" value="" name="xValues" class="form-control" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-12">
+        <input type="submit" value="lav chart" class="btn btn-primary" />
+    </div>
+}
+
+

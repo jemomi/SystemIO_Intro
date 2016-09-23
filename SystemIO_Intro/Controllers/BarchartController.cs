@@ -84,12 +84,11 @@ namespace SystemIO_Intro.Controllers
 
                 gfxChart.DrawString(values[i].MonthName.Substring(0, 3), fontMonth, new SolidBrush(Color.Black), rectMonthName, sf);
             }
-            //gfxChart.DrawString(maxHeight.ToString(), new Font("Arial", 15), new SolidBrush(Color.Black), 0, 0);
 
             MemoryStream ms = new MemoryStream();
             bmpChart.Save(ms, ImageFormat.Jpeg);
 
-            //bmpChart.Save(Server.MapPath("~/Content/Upload/Barcharts/" + Guid.NewGuid() + ".jpg"), ImageFormat.Jpeg);
+            bmpChart.Save(Server.MapPath("~/Content/Upload/Barcharts/" + Guid.NewGuid() + ".jpg"), ImageFormat.Jpeg);
 
             //Gem billedet og vis det i viewet
             return View(ms);

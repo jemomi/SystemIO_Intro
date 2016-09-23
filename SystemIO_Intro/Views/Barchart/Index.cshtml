@@ -2,9 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
+<h2>Lav et søjle diagram</h2>
 
 @using (Html.BeginForm())
 {
@@ -20,11 +18,12 @@
             </div>
         }
     </div>
-    <div class="col-md-12">
-        <input type="submit" value="lav chart" class="btn btn-primary" />
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" value="lav chart" class="btn btn-primary" />
+        </div>
     </div>
 }
-
 <div class="row">
     <div class="col-md-12">
         @if (Model != null)

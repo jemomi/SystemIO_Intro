@@ -19,10 +19,10 @@ namespace SystemIO_Intro.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(int[] xValues)
+        public ActionResult Index(int[] xValues, List<Color> valueColors)
         {
             //Laver vores array til et MonthAndValue List Class
-            List<MonthAndValue> values = GetValuesFromArray(xValues);
+            List<MonthAndValue> values = GetValuesFromArray(xValues, valueColors);
 
             //Brug values til at lav et bar chart billede.
             int spaceing = 20;
@@ -73,9 +73,10 @@ namespace SystemIO_Intro.Controllers
                     LineAlignment = StringAlignment.Center
                 };
 
+                var hej = bgColor.GetBrightness();
                 int bgAvg = (bgColor.R + bgColor.G + bgColor.B) / 3;
 
-                Brush brushMonthVal = new SolidBrush(bgAvg > 100 ? Color.Black : Color.White);
+                Brush brushMonthVal = new SolidBrush(bgColor.GetBrightness() > .4 ? Color.Black : Color.White);
                 Rectangle rectMonthVal = new Rectangle(rectMonthBar.X, rectMonthBar.Y, rectMonthBar.Width, 40);
 
                 gfxChart.DrawString(values[i].YValue.ToString(), fontMonth, brushMonthVal, rectMonthVal, sf);
@@ -95,7 +96,7 @@ namespace SystemIO_Intro.Controllers
         }
 
         //Omdanner vores array til et liste af MonthAndValue
-        public static List<MonthAndValue> GetValuesFromArray(int[] array)
+        public static List<MonthAndValue> GetValuesFromArray(int[] array, List<Color> arrColor)
         {
             Random rnd = new Random();
 
@@ -109,7 +110,7 @@ namespace SystemIO_Intro.Controllers
                     {
                         MonthName = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i),
                         YValue = value,
-                        bgColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256))
+                        bgColor = arrColor[i - 1] != Color.Black ? arrColor[i - 1] : Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256))
                     });
                 }
                 i++;

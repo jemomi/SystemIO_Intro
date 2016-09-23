@@ -38,7 +38,7 @@ namespace SystemIO_Intro.Controllers
             Bitmap bmpChart = new Bitmap(1024, maxHeight + intBottomBarHeight + intTopSpace);
             Graphics gfxChart = Graphics.FromImage(bmpChart);
             gfxChart.FillRectangle(new SolidBrush(Color.White), 0, 0, bmpChart.Width, bmpChart.Height);
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i <= 10; i++)
             {
                 decimal decorInterval = (decimal)(maxHeight / Convert.ToDecimal(10) * (Convert.ToDecimal(10) - Convert.ToDecimal(i)));
                 int decorY = maxHeight / 10 * i + intTopSpace;
@@ -53,14 +53,14 @@ namespace SystemIO_Intro.Controllers
                 int intMonthBarWidth = ((bmpChart.Width - intLeftContentWidth) / values.Count) - spaceing - (spaceing / values.Count);
                 Rectangle rectMonthBar = new Rectangle((spaceing * (i + 1)) + (intMonthBarWidth * i) + intLeftContentWidth, maxHeight - values[i].YValue + intTopSpace, intMonthBarWidth, values[i].YValue);
                 Brush brushMonthBar = new SolidBrush(bgColor);
-                Pen penMonthVal = new Pen(brushMonthBar, 3);
-                gfxChart.DrawLine(penMonthVal, 0, rectMonthBar.Y, rectMonthBar.X + rectMonthBar.Width, rectMonthBar.Y);
+                Pen penMonthVal = new Pen(brushMonthBar, 2);
+                gfxChart.DrawLine(penMonthVal, 0, rectMonthBar.Y + (penMonthVal.Width / 2), rectMonthBar.X + rectMonthBar.Width, rectMonthBar.Y + (penMonthVal.Width / 2));
             }
             for (int i = 0; i < values.Count; i++)
             {
                 int intMonthBarWidth = ((bmpChart.Width - intLeftContentWidth) / values.Count) - spaceing - (spaceing / values.Count);
 
-                Color bgColor = values[i].bgColor;
+                Color bgColor = Color.FromArgb(235, values[i].bgColor);
                 Rectangle rectMonthBar = new Rectangle((spaceing * (i + 1)) + (intMonthBarWidth * i) + intLeftContentWidth, maxHeight - values[i].YValue + intTopSpace, intMonthBarWidth, values[i].YValue);
                 Brush brushMonthBar = new SolidBrush(bgColor);
 
